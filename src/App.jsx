@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<ManageEstimates />} />
               <Route path="/manage-customers" element={<ManageCustomers />} />
-              <Route path="/manage-estimates" element={<ManageEstimates />} />
+              {/* Removed the estimate-form route */}
               {/* Add more routes here as needed */}
             </Route>
           </Routes>
