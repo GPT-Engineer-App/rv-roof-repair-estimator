@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAddEstimate, useUpdateEstimate, useEstimate, useCustomers } from "@/integrations/supabase/index.js";
+import { useAddEstimate, useUpdateEstimate, useEstimate, useCustomers, usePreConfiguredJobs } from "@/integrations/supabase/index.js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -15,6 +15,7 @@ const EstimateForm = () => {
   const { data: estimate, error: estimateError, isLoading: estimateLoading } = useEstimate(estimate_id, {
     enabled: isEditMode,
   });
+  const { data: jobs, error: jobsError, isLoading: jobsLoading } = usePreConfiguredJobs();
 
   const addEstimate = useAddEstimate();
   const updateEstimate = useUpdateEstimate();
@@ -41,6 +42,7 @@ const EstimateForm = () => {
     tax: "",
     total_estimate: "",
     customer_id: "",
+    job_code: "",
   });
 
   useEffect(() => {
@@ -67,6 +69,7 @@ const EstimateForm = () => {
         tax: estimate.tax,
         total_estimate: estimate.total_estimate,
         customer_id: estimate.customer_id,
+        job_code: estimate.job_code,
       });
     }
   }, [isEditMode, estimate]);
@@ -86,6 +89,18 @@ const EstimateForm = () => {
     }));
   };
 
+  const handleJobChange = (value) => {
+    const job = jobs.find((job) => job.job_code === value);
+    setFormData((prev) => ({
+      ...prev,
+      job_code: value,
+      repair_description: job.job_description,
+      hrs: job.hrs,
+      labor_per_hr: job.labor_per_hr,
+      total_estimate: job.job_price,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -102,8 +117,8 @@ const EstimateForm = () => {
     }
   };
 
-  if (estimateLoading || customersLoading) return <div>Loading...</div>;
-  if (estimateError || customersError) return <div>Error loading data</div>;
+  if (estimateLoading || customersLoading || jobsLoading) return <div>Loading...</div>;
+  if (estimateError || customersError || jobsError) return <div>Error loading data</div>;
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
@@ -183,6 +198,18 @@ const EstimateForm = () => {
           value={formData.estimate_date}
           onChange={handleInputChange}
         />
+        <Select onValueChange={handleJobChange} value={formData.job_code}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a job" />
+          </SelectTrigger>
+          <SelectContent>
+            {jobs.map((job) => (
+              <SelectItem key={job.job_code} value={job.job_code}>
+                {job.job_name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Input
           name="repair_description"
           placeholder="Repair Description"
