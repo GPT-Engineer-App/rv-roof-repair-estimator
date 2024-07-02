@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./layouts/sidebar"; // Use the sidebar layout
 import Index from "./pages/Index.jsx";
 import ManageCustomers from "./pages/ManageCustomers.jsx";
+import ManageEstimates from "./pages/ManageEstimates.jsx";
 const queryClient = new QueryClient();
 
 export const navItems = [
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<Index />} />
               <Route path="/manage-customers" element={<ManageCustomers />} />
+              <Route path="/manage-estimates" element={<ManageEstimates />} />
               {/* Add more routes here as needed */}
             </Route>
           </Routes>
