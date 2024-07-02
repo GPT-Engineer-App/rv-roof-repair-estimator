@@ -79,6 +79,17 @@ const ManageCustomers = () => {
     });
   };
 
+  const handleDialogClose = () => {
+    setSelectedCustomer(null);
+    setFormData({
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      email: "",
+      address: "",
+    });
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading customers</div>;
 
@@ -117,13 +128,13 @@ const ManageCustomers = () => {
         </TableBody>
       </Table>
 
-      <Dialog>
+      <Dialog onOpenChange={handleDialogClose}>
         <DialogTrigger asChild>
           <Button className="mt-4">Add Customer</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{selectedCustomer ? "Edit Customer" : "Add Customer"}</DialogTitle>
+            <DialogTitle>{selectedCustomer ? "Edit Customer" : "Create Customer"}</DialogTitle>
           </DialogHeader>
           <form className="space-y-4">
             <Input
@@ -160,7 +171,7 @@ const ManageCustomers = () => {
               type="button"
               onClick={selectedCustomer ? handleUpdateCustomer : handleAddCustomer}
             >
-              {selectedCustomer ? "Update Customer" : "Add Customer"}
+              {selectedCustomer ? "Update Customer" : "Create Customer"}
             </Button>
           </form>
         </DialogContent>
