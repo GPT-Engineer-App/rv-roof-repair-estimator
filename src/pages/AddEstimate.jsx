@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAddEstimate, useAdvisors } from "@/integrations/supabase/index.js";
+import { useState, useEffect } from "react";
+import { useAddEstimate, useAdvisors, usePreConfiguredJobs, usePreConfiguredJob } from "@/integrations/supabase/index.js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +15,7 @@ const AddEstimate = () => {
     phone_number: "",
     unit_description: "",
     vin: "",
-    advisor_id: "", // Updated to store advisor_id
+    advisor_id: "",
     payment_type: "",
     deductible: "",
     estimate_date: "",
@@ -44,7 +44,23 @@ const AddEstimate = () => {
 
   const addEstimate = useAddEstimate();
   const { data: advisors, error: advisorsError, isLoading: advisorsLoading } = useAdvisors();
+  const { data: jobs, error: jobsError, isLoading: jobsLoading } = usePreConfiguredJobs();
+  const [selectedJob, setSelectedJob] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (selectedJob) {
+      const fetchJobDetails = async () => {
+        const jobDetails = await usePreConfiguredJob(selectedJob);
+        setFormData((prev) => ({
+          ...prev,
+          ...jobDetails,
+          job_code: selectedJob,
+        }));
+      };
+      fetchJobDetails();
+    }
+  }, [selectedJob]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -66,13 +82,28 @@ const AddEstimate = () => {
     }
   };
 
-  if (advisorsLoading) return <div>Loading...</div>;
-  if (advisorsError) return <div>Error loading advisors</div>;
+  if (advisorsLoading || jobsLoading) return <div>Loading...</div>;
+  if (advisorsError || jobsError) return <div>Error loading data</div>;
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">Add Estimate</h1>
       <form className="space-y-4" onSubmit={handleSubmit}>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Select Job</label>
+          <Select onValueChange={(value) => setSelectedJob(value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a job" />
+            </SelectTrigger>
+            <SelectContent>
+              {jobs.map((job) => (
+                <SelectItem key={job.job_code} value={job.job_code}>
+                  {job.job_name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Input name="estimate_number" placeholder="Estimate Number" value={formData.estimate_number} onChange={handleInputChange} />
         <Input name="first_name" placeholder="First Name" value={formData.first_name} onChange={handleInputChange} />
         <Input name="last_name" placeholder="Last Name" value={formData.last_name} onChange={handleInputChange} />
