@@ -37,6 +37,7 @@ const ManageCustomers = () => {
         email: "",
         address: "",
       });
+      setSelectedCustomer(null);
     } catch (error) {
       toast.error("Failed to add customer");
     }
