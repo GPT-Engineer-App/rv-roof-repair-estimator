@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAddEstimate, useAdvisors } from "@/integrations/supabase/index.js";
+import { useState, useEffect } from "react";
+import { useAddEstimate, useAdvisors, usePreConfiguredJob } from "@/integrations/supabase/index.js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +15,7 @@ const AddEstimate = () => {
     phone_number: "",
     unit_description: "",
     vin: "",
-    advisor_id: "", // Updated to store advisor_id
+    advisor_id: "",
     payment_type: "",
     deductible: "",
     estimate_date: "",
@@ -42,9 +42,37 @@ const AddEstimate = () => {
     customer_id: "",
   });
 
+  const [selectedJobCode, setSelectedJobCode] = useState("");
+  const { data: jobDetails, refetch: fetchJobDetails } = usePreConfiguredJob(selectedJobCode, { enabled: false });
+
   const addEstimate = useAddEstimate();
   const { data: advisors, error: advisorsError, isLoading: advisorsLoading } = useAdvisors();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (selectedJobCode) {
+      fetchJobDetails();
+    }
+  }, [selectedJobCode, fetchJobDetails]);
+
+  useEffect(() => {
+    if (jobDetails) {
+      setFormData((prev) => ({
+        ...prev,
+        roof_kit: jobDetails.roof_kit,
+        roof_membrane: jobDetails.roof_membrane,
+        slf_lvl_dicor: jobDetails.slf_lvl_dicor,
+        non_lvl_dicor: jobDetails.non_lvl_dicor,
+        roof_screws: jobDetails.roof_screws,
+        glue: jobDetails.glue,
+        additional_parts: jobDetails.additional_parts,
+        repair_description: jobDetails.repair_description,
+        hrs: jobDetails.hrs,
+        labor_per_hr: jobDetails.labor_per_hr,
+        total_estimate: jobDetails.job_price,
+      }));
+    }
+  }, [jobDetails]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -89,6 +117,21 @@ const AddEstimate = () => {
               {advisors.map((advisor) => (
                 <SelectItem key={advisor.advisor_id} value={advisor.advisor_id}>
                   {advisor.advisor_name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Job Code</label>
+          <Select onValueChange={setSelectedJobCode}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a job code" />
+            </SelectTrigger>
+            <SelectContent>
+              {jobs.map((job) => (
+                <SelectItem key={job.job_code} value={job.job_code}>
+                  {job.job_name}
                 </SelectItem>
               ))}
             </SelectContent>
