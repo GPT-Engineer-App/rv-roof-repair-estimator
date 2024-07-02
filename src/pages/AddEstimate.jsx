@@ -36,7 +36,6 @@ const AddEstimate = () => {
     shop_supplies: "",
     tax: "",
     total_estimate: "",
-    job_code: "",
     parts_configuration: "",
     labor_configuration: "",
     customer_id: "",
@@ -178,7 +177,6 @@ const AddEstimate = () => {
         <Input name="shop_supplies" placeholder="Shop Supplies" value={formData.shop_supplies} onChange={handleInputChange} />
         <Input name="tax" placeholder="Tax" value={formData.tax} onChange={handleInputChange} />
         <Input name="total_estimate" placeholder="Total Estimate" value={formData.total_estimate} onChange={handleInputChange} />
-        <Input name="job_code" placeholder="Job Code" value={formData.job_code} onChange={handleInputChange} />
         <Input name="parts_configuration" placeholder="Parts Configuration" value={formData.parts_configuration} onChange={handleInputChange} />
         <Input name="labor_configuration" placeholder="Labor Configuration" value={formData.labor_configuration} onChange={handleInputChange} />
         <Input name="customer_id" placeholder="Customer ID" value={formData.customer_id} onChange={handleInputChange} />
