@@ -48,10 +48,7 @@ const Sidebar = () => (
               {item.title}
             </SidebarNavLink>
           ))}
-          <SidebarNavLink to="/manage-customers">
-            <Users className="h-4 w-4" />
-            Manage Customers
-          </SidebarNavLink>
+          {/* Removed the "Manage Customers" menu item */}
           {/* Removed the "Manage Estimates" menu item */}
         </nav>
       </div>
@@ -81,9 +78,7 @@ const MobileSidebar = () => (
             {item.title}
           </SidebarNavLink>
         ))}
-        <SidebarNavLink to="/manage-customers">
-          Manage Customers
-        </SidebarNavLink>
+        {/* Removed the "Manage Customers" menu item */}
         {/* Removed the "Manage Estimates" menu item */}
       </nav>
     </SheetContent>
