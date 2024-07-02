@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAddEstimate } from "@/integrations/supabase/index.js";
+import { useAddEstimate, useAdvisors } from "@/integrations/supabase/index.js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +15,7 @@ const AddEstimate = () => {
     phone_number: "",
     unit_description: "",
     vin: "",
-    advisor: "",
+    advisor_id: "", // Updated to store advisor_id
     payment_type: "",
     deductible: "",
     estimate_date: "",
@@ -43,6 +43,7 @@ const AddEstimate = () => {
   });
 
   const addEstimate = useAddEstimate();
+  const { data: advisors, error: advisorsError, isLoading: advisorsLoading } = useAdvisors();
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -65,6 +66,9 @@ const AddEstimate = () => {
     }
   };
 
+  if (advisorsLoading) return <div>Loading...</div>;
+  if (advisorsError) return <div>Error loading advisors</div>;
+
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">Add Estimate</h1>
@@ -75,7 +79,21 @@ const AddEstimate = () => {
         <Input name="phone_number" placeholder="Phone Number" value={formData.phone_number} onChange={handleInputChange} />
         <Input name="unit_description" placeholder="Unit Description" value={formData.unit_description} onChange={handleInputChange} />
         <Input name="vin" placeholder="VIN" value={formData.vin} onChange={handleInputChange} />
-        <Input name="advisor" placeholder="Advisor" value={formData.advisor} onChange={handleInputChange} />
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Advisor</label>
+          <Select onValueChange={(value) => handleSelectChange("advisor_id", value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select an advisor" />
+            </SelectTrigger>
+            <SelectContent>
+              {advisors.map((advisor) => (
+                <SelectItem key={advisor.advisor_id} value={advisor.advisor_id}>
+                  {advisor.advisor_name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Select onValueChange={(value) => handleSelectChange("payment_type", value)}>
           <SelectTrigger>
             <SelectValue placeholder="Payment Type" />
