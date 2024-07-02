@@ -52,10 +52,7 @@ const Sidebar = () => (
             <Users className="h-4 w-4" />
             Manage Customers
           </SidebarNavLink>
-          <SidebarNavLink to="/manage-estimates">
-            <Package2 className="h-4 w-4" />
-            Manage Estimates
-          </SidebarNavLink>
+          {/* Removed the "Manage Estimates" menu item */}
         </nav>
       </div>
     </div>
@@ -87,9 +84,7 @@ const MobileSidebar = () => (
         <SidebarNavLink to="/manage-customers">
           Manage Customers
         </SidebarNavLink>
-        <SidebarNavLink to="/manage-estimates">
-          Manage Estimates
-        </SidebarNavLink>
+        {/* Removed the "Manage Estimates" menu item */}
       </nav>
     </SheetContent>
   </Sheet>
