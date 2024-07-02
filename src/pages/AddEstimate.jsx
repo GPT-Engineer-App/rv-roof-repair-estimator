@@ -50,6 +50,12 @@ const AddEstimate = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (selectedJobCode) {
+      fetchJobDetails();
+    }
+  }, [selectedJobCode, fetchJobDetails]);
+
+  useEffect(() => {
     if (jobDetails) {
       console.log("Job Details Fetched: ", jobDetails);
       setFormData((prev) => ({
