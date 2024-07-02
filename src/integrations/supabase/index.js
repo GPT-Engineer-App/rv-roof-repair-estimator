@@ -36,7 +36,7 @@ const fromSupabase = async (query) => {
 
 | name       | type        | format | required |
 |------------|-------------|--------|----------|
-| estimate_id| int8        | number | true     |
+| estimate_id| int4        | number | true     |
 | estimate_number | varchar | string | false    |
 | first_name | varchar     | string | false    |
 | last_name  | varchar     | string | false    |
@@ -53,7 +53,7 @@ const fromSupabase = async (query) => {
 | non_lvl_dicor | numeric  | number | false    |
 | roof_screws | numeric    | number | false    |
 | glue       | numeric     | number | false    |
-| additional_parts | numeric | number | false    |
+| additional_parts | numeric | number | false  |
 | repair_description | text | string | false    |
 | notes      | text        | string | false    |
 | hrs        | numeric     | number | false    |
@@ -93,13 +93,14 @@ const fromSupabase = async (query) => {
 
 */
 
+// Hooks for customers table
 export const useCustomers = () => useQuery({
     queryKey: ['customers'],
     queryFn: () => fromSupabase(supabase.from('customers').select('*')),
 });
 
 export const useCustomer = (customer_id) => useQuery({
-    queryKey: ['customer', customer_id],
+    queryKey: ['customers', customer_id],
     queryFn: () => fromSupabase(supabase.from('customers').select('*').eq('customer_id', customer_id).single()),
 });
 
@@ -133,13 +134,14 @@ export const useDeleteCustomer = () => {
     });
 };
 
+// Hooks for estimates table
 export const useEstimates = () => useQuery({
     queryKey: ['estimates'],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*')),
 });
 
 export const useEstimate = (estimate_id) => useQuery({
-    queryKey: ['estimate', estimate_id],
+    queryKey: ['estimates', estimate_id],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*').eq('estimate_id', estimate_id).single()),
 });
 
@@ -173,13 +175,14 @@ export const useDeleteEstimate = () => {
     });
 };
 
+// Hooks for pre_configured_jobs table
 export const usePreConfiguredJobs = () => useQuery({
     queryKey: ['pre_configured_jobs'],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*')),
 });
 
 export const usePreConfiguredJob = (id) => useQuery({
-    queryKey: ['pre_configured_job', id],
+    queryKey: ['pre_configured_jobs', id],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*').eq('id', id).single()),
 });
 
