@@ -201,7 +201,7 @@ const ManageEstimates = () => {
           <DialogHeader>
             <DialogTitle>{selectedEstimate ? "Edit Estimate" : "Add Estimate"}</DialogTitle>
           </DialogHeader>
-          <form className="space-y-4">
+          <form className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               name="estimate_number"
               placeholder="Estimate Number"
@@ -339,6 +339,7 @@ const ManageEstimates = () => {
             <Button
               type="button"
               onClick={selectedEstimate ? handleUpdateEstimate : handleAddEstimate}
+              className="col-span-1 md:col-span-2"
             >
               {selectedEstimate ? "Update Estimate" : "Add Estimate"}
             </Button>
