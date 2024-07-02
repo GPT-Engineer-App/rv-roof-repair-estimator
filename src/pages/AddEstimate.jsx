@@ -42,18 +42,12 @@ const AddEstimate = () => {
   });
 
   const [selectedJobCode, setSelectedJobCode] = useState("");
-  const { data: jobDetails, refetch: fetchJobDetails } = usePreConfiguredJob(selectedJobCode, { enabled: false });
+  const { data: jobDetails, refetch: fetchJobDetails } = usePreConfiguredJob(selectedJobCode, { enabled: !!selectedJobCode });
   const { data: jobs, error: jobsError, isLoading: jobsLoading } = usePreConfiguredJobs();
 
   const addEstimate = useAddEstimate();
   const { data: advisors, error: advisorsError, isLoading: advisorsLoading } = useAdvisors();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (selectedJobCode) {
-      fetchJobDetails();
-    }
-  }, [selectedJobCode, fetchJobDetails]);
 
   useEffect(() => {
     if (jobDetails) {
