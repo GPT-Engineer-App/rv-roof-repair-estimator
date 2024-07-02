@@ -51,6 +51,7 @@ const AddEstimate = () => {
 
   useEffect(() => {
     if (jobDetails) {
+      console.log("Job Details Fetched: ", jobDetails);
       setFormData((prev) => ({
         ...prev,
         roof_kit: jobDetails.roof_kit,
