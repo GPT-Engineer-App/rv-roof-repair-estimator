@@ -7,7 +7,6 @@ import Layout from "./layouts/sidebar"; // Use the sidebar layout
 import Index from "./pages/Index.jsx";
 import ManageCustomers from "./pages/ManageCustomers.jsx";
 import ManageEstimates from "./pages/ManageEstimates.jsx";
-import EstimateForm from "./pages/EstimateForm.jsx"; // Import the new EstimateForm page
 
 const queryClient = new QueryClient();
 
@@ -27,11 +26,9 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Index />} />
+              <Route index element={<ManageEstimates />} />
               <Route path="/manage-customers" element={<ManageCustomers />} />
               <Route path="/manage-estimates" element={<ManageEstimates />} />
-              <Route path="/estimate-form" element={<EstimateForm />} /> {/* Add the new route */}
-              <Route path="/estimate-form/:estimateId" element={<EstimateForm />} /> {/* Add the new route for editing */}
               {/* Add more routes here as needed */}
             </Route>
           </Routes>
