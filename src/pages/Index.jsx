@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePreConfiguredJobs } from "@/integrations/supabase/index.js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,7 +10,12 @@ const Index = () => {
   const [customerType, setCustomerType] = useState("");
   const [deductible, setDeductible] = useState("");
 
+  const { data: jobs, error, isLoading } = usePreConfiguredJobs();
+
   const handleJobChange = (value) => setJob(value);
+  
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading jobs</div>;
   const handleCustomerTypeChange = (value) => setCustomerType(value);
   const handleDeductibleChange = (value) => setDeductible(value);
 
@@ -24,9 +30,11 @@ const Index = () => {
               <SelectValue placeholder="Select a job" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="job1">Job 1</SelectItem>
-              <SelectItem value="job2">Job 2</SelectItem>
-              <SelectItem value="job3">Job 3</SelectItem>
+              {jobs.map((job) => (
+                <SelectItem key={job.job_code} value={job.job_code}>
+                  {job.job_name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
