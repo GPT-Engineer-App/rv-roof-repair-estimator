@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Home, Users } from "lucide-react";
+import AddEstimate from "./pages/AddEstimate.jsx";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./layouts/sidebar"; // Use the sidebar layout
 import Index from "./pages/Index.jsx";
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<ManageEstimates />} />
               <Route path="/manage-customers" element={<ManageCustomers />} />
+              <Route path="/add-estimate" element={<AddEstimate />} />
               {/* Removed the estimate-form route */}
               {/* Add more routes here as needed */}
             </Route>

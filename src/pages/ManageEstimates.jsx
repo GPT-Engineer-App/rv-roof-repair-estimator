@@ -21,7 +21,7 @@ const ManageEstimates = () => {
   };
 
   const handleAddEstimateClick = () => {
-    navigate("/estimate-form");
+    navigate("/add-estimate");
   };
 
   const handleEditClick = (estimate) => {
