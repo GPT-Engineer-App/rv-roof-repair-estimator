@@ -8,6 +8,7 @@ import Layout from "./layouts/sidebar"; // Use the sidebar layout
 import Index from "./pages/Index.jsx";
 import ManageCustomers from "./pages/ManageCustomers.jsx";
 import ManageEstimates from "./pages/ManageEstimates.jsx";
+import JobsConfiguration from "./pages/JobsConfiguration.jsx";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => {
               <Route index element={<ManageEstimates />} />
               <Route path="/manage-customers" element={<ManageCustomers />} />
               <Route path="/add-estimate" element={<AddEstimate />} />
+              <Route path="/jobs-configuration" element={<JobsConfiguration />} />
               {/* Removed the estimate-form route */}
               {/* Add more routes here as needed */}
             </Route>

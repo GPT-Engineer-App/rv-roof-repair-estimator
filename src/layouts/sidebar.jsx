@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { CircleUser, Menu, Package2, Users } from "lucide-react";
+import { CircleUser, Menu, Package2, Users, Briefcase } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { navItems } from "../App";
 
@@ -48,6 +48,10 @@ const Sidebar = () => (
               {item.title}
             </SidebarNavLink>
           ))}
+          <SidebarNavLink to="/jobs-configuration">
+            <Briefcase className="h-4 w-4" />
+            Jobs Configuration
+          </SidebarNavLink>
           {/* Removed the "Manage Customers" menu item */}
           {/* Removed the "Manage Estimates" menu item */}
         </nav>
@@ -78,6 +82,10 @@ const MobileSidebar = () => (
             {item.title}
           </SidebarNavLink>
         ))}
+        <SidebarNavLink to="/jobs-configuration">
+          <Briefcase className="h-4 w-4" />
+          Jobs Configuration
+        </SidebarNavLink>
         {/* Removed the "Manage Customers" menu item */}
         {/* Removed the "Manage Estimates" menu item */}
       </nav>
