@@ -21,83 +21,83 @@ const fromSupabase = async (query) => {
 
 ### customers
 
-| name          | type        | format | required |
-|---------------|-------------|--------|----------|
-| customer_id   | uuid        | string | true     |
-| first_name    | text        | string | false    |
-| last_name     | text        | string | false    |
-| phone_number  | text        | string | false    |
-| email         | text        | string | false    |
-| address       | text        | string | false    |
-| created_at    | timestamptz | string | true     |
-| updated_at    | timestamptz | string | true     |
+| name       | type        | format | required |
+|------------|-------------|--------|----------|
+| customer_id| uuid        | string | true     |
+| first_name | text        | string | false    |
+| last_name  | text        | string | false    |
+| phone_number| text       | string | false    |
+| email      | text        | string | false    |
+| address    | text        | string | false    |
+| created_at | timestamptz | string | true     |
+| updated_at | timestamptz | string | true     |
 
 ### advisors
 
-| name          | type        | format | required |
-|---------------|-------------|--------|----------|
-| advisor_id    | int4        | number | true     |
-| advisor_name  | text        | string | true     |
+| name       | type        | format | required |
+|------------|-------------|--------|----------|
+| advisor_id | int4        | number | true     |
+| advisor_name| text       | string | true     |
 
 ### estimates
 
-| name                 | type    | format | required |
-|----------------------|---------|--------|----------|
-| estimate_id          | int4    | number | true     |
-| estimate_number      | varchar | string | false    |
-| first_name           | varchar | string | false    |
-| last_name            | varchar | string | false    |
-| phone_number         | varchar | string | false    |
-| unit_description     | text    | string | false    |
-| vin                  | varchar | string | false    |
-| advisor              | varchar | string | false    |
-| payment_type         | varchar | string | false    |
-| deductible           | varchar | string | false    |
-| estimate_date        | date    | string | false    |
-| roof_kit             | numeric | number | false    |
-| roof_membrane        | numeric | number | false    |
-| slf_lvl_dicor        | numeric | number | false    |
-| non_lvl_dicor        | numeric | number | false    |
-| roof_screws          | numeric | number | false    |
-| glue                 | numeric | number | false    |
-| additional_parts     | numeric | number | false    |
-| repair_description   | text    | string | false    |
-| notes                | text    | string | false    |
-| hrs                  | numeric | number | false    |
-| labor_per_hr         | numeric | number | false    |
-| sublet               | numeric | number | false    |
-| extras               | numeric | number | false    |
-| labor                | numeric | number | false    |
-| shop_supplies        | numeric | number | false    |
-| tax                  | numeric | number | false    |
-| total_estimate       | numeric | number | false    |
-| created_at           | timestamp | string | true   |
-| updated_at           | timestamp | string | true   |
-| job_code             | text    | string | false    |
-| parts_configuration  | jsonb   | string | false    |
-| labor_configuration  | jsonb   | string | false    |
-| customer_id          | uuid    | string | false    |
-| advisor_id           | int4    | number | false    |
+| name       | type        | format | required |
+|------------|-------------|--------|----------|
+| estimate_id| int4        | number | true     |
+| estimate_number| varchar | string | false    |
+| first_name | varchar     | string | false    |
+| last_name  | varchar     | string | false    |
+| phone_number| varchar    | string | false    |
+| unit_description| text   | string | false    |
+| vin        | varchar     | string | false    |
+| advisor    | varchar     | string | false    |
+| payment_type| varchar    | string | false    |
+| deductible | varchar     | string | false    |
+| estimate_date| date      | string | false    |
+| roof_kit   | numeric     | number | false    |
+| roof_membrane| numeric   | number | false    |
+| slf_lvl_dicor| numeric   | number | false    |
+| non_lvl_dicor| numeric   | number | false    |
+| roof_screws| numeric     | number | false    |
+| glue       | numeric     | number | false    |
+| additional_parts| numeric| number | false    |
+| repair_description| text | string | false    |
+| notes      | text        | string | false    |
+| hrs        | numeric     | number | false    |
+| labor_per_hr| numeric    | number | false    |
+| sublet     | numeric     | number | false    |
+| extras     | numeric     | number | false    |
+| labor      | numeric     | number | false    |
+| shop_supplies| numeric   | number | false    |
+| tax        | numeric     | number | false    |
+| total_estimate| numeric  | number | false    |
+| created_at | timestamp   | string | true     |
+| updated_at | timestamp   | string | true     |
+| job_code   | text        | string | false    |
+| parts_configuration| jsonb| string | false    |
+| labor_configuration| jsonb| string | false    |
+| customer_id| uuid        | string | false    |
+| advisor_id | int4        | number | false    |
 
 ### pre_configured_jobs
 
-| name                | type    | format | required |
-|---------------------|---------|--------|----------|
-| id                  | int8    | number | true     |
-| job_code            | text    | string | true     |
-| job_name            | text    | string | true     |
-| job_description     | text    | string | false    |
-| roof_kit            | numeric | number | false    |
-| roof_membrane       | numeric | number | false    |
-| slf_lvl_dicor       | numeric | number | false    |
-| non_lvl_dicor       | numeric | number | false    |
-| roof_screws         | numeric | number | false    |
-| glue                | numeric | number | false    |
-| additional_parts    | numeric | number | false    |
-| repair_description  | text    | string | false    |
-| hrs                 | numeric | number | false    |
-| labor_per_hr        | numeric | number | false    |
-| job_price           | numeric | number | false    |
+| name       | type        | format | required |
+|------------|-------------|--------|----------|
+| id         | int8        | number | true     |
+| job_code   | text        | string | true     |
+| job_name   | text        | string | true     |
+| job_description| text    | string | false    |
+| roof_kit   | numeric     | number | false    |
+| roof_membrane| numeric   | number | false    |
+| slf_lvl_dicor| numeric   | number | false    |
+| non_lvl_dicor| numeric   | number | false    |
+| roof_screws| numeric     | number | false    |
+| glue       | numeric     | number | false    |
+| additional_parts| numeric| number | false    |
+| repair_description| text | string | false    |
+| hrs        | numeric     | number | false    |
+| labor_per_hr| numeric    | number | false    |
+| job_price  | numeric     | number | false    |
 
 */
 
@@ -106,10 +106,12 @@ export const useCustomers = () => useQuery({
     queryKey: ['customers'],
     queryFn: () => fromSupabase(supabase.from('customers').select('*')),
 });
+
 export const useCustomer = (customer_id) => useQuery({
-    queryKey: ['customer', customer_id],
+    queryKey: ['customers', customer_id],
     queryFn: () => fromSupabase(supabase.from('customers').select('*').eq('customer_id', customer_id).single()),
 });
+
 export const useAddCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -119,6 +121,7 @@ export const useAddCustomer = () => {
         },
     });
 };
+
 export const useUpdateCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -128,6 +131,7 @@ export const useUpdateCustomer = () => {
         },
     });
 };
+
 export const useDeleteCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -143,10 +147,12 @@ export const useAdvisors = () => useQuery({
     queryKey: ['advisors'],
     queryFn: () => fromSupabase(supabase.from('advisors').select('*')),
 });
+
 export const useAdvisor = (advisor_id) => useQuery({
-    queryKey: ['advisor', advisor_id],
+    queryKey: ['advisors', advisor_id],
     queryFn: () => fromSupabase(supabase.from('advisors').select('*').eq('advisor_id', advisor_id).single()),
 });
+
 export const useAddAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -156,6 +162,7 @@ export const useAddAdvisor = () => {
         },
     });
 };
+
 export const useUpdateAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -165,6 +172,7 @@ export const useUpdateAdvisor = () => {
         },
     });
 };
+
 export const useDeleteAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -180,10 +188,12 @@ export const useEstimates = () => useQuery({
     queryKey: ['estimates'],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*')),
 });
+
 export const useEstimate = (estimate_id) => useQuery({
-    queryKey: ['estimate', estimate_id],
+    queryKey: ['estimates', estimate_id],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*').eq('estimate_id', estimate_id).single()),
 });
+
 export const useAddEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -193,6 +203,7 @@ export const useAddEstimate = () => {
         },
     });
 };
+
 export const useUpdateEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -202,6 +213,7 @@ export const useUpdateEstimate = () => {
         },
     });
 };
+
 export const useDeleteEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -217,10 +229,12 @@ export const usePreConfiguredJobs = () => useQuery({
     queryKey: ['pre_configured_jobs'],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*')),
 });
+
 export const usePreConfiguredJob = (id) => useQuery({
-    queryKey: ['pre_configured_job', id],
+    queryKey: ['pre_configured_jobs', id],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*').eq('id', id).single()),
 });
+
 export const useAddPreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -230,6 +244,7 @@ export const useAddPreConfiguredJob = () => {
         },
     });
 };
+
 export const useUpdatePreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -239,6 +254,7 @@ export const useUpdatePreConfiguredJob = () => {
         },
     });
 };
+
 export const useDeletePreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
