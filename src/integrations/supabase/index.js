@@ -74,8 +74,8 @@ const fromSupabase = async (query) => {
 | created_at | timestamp   | string | true     |
 | updated_at | timestamp   | string | true     |
 | job_code   | text        | string | false    |
-| parts_configuration| jsonb| string | false    |
-| labor_configuration| jsonb| string | false    |
+| parts_configuration| jsonb| string| false    |
+| labor_configuration| jsonb| string| false    |
 | customer_id| uuid        | string | false    |
 | advisor_id | int4        | number | false    |
 
@@ -106,12 +106,10 @@ export const useCustomers = () => useQuery({
     queryKey: ['customers'],
     queryFn: () => fromSupabase(supabase.from('customers').select('*')),
 });
-
 export const useCustomer = (customer_id) => useQuery({
     queryKey: ['customers', customer_id],
     queryFn: () => fromSupabase(supabase.from('customers').select('*').eq('customer_id', customer_id).single()),
 });
-
 export const useAddCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -121,7 +119,6 @@ export const useAddCustomer = () => {
         },
     });
 };
-
 export const useUpdateCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -131,7 +128,6 @@ export const useUpdateCustomer = () => {
         },
     });
 };
-
 export const useDeleteCustomer = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -147,12 +143,10 @@ export const useAdvisors = () => useQuery({
     queryKey: ['advisors'],
     queryFn: () => fromSupabase(supabase.from('advisors').select('*')),
 });
-
 export const useAdvisor = (advisor_id) => useQuery({
     queryKey: ['advisors', advisor_id],
     queryFn: () => fromSupabase(supabase.from('advisors').select('*').eq('advisor_id', advisor_id).single()),
 });
-
 export const useAddAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -162,7 +156,6 @@ export const useAddAdvisor = () => {
         },
     });
 };
-
 export const useUpdateAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -172,7 +165,6 @@ export const useUpdateAdvisor = () => {
         },
     });
 };
-
 export const useDeleteAdvisor = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -188,12 +180,10 @@ export const useEstimates = () => useQuery({
     queryKey: ['estimates'],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*')),
 });
-
 export const useEstimate = (estimate_id) => useQuery({
     queryKey: ['estimates', estimate_id],
     queryFn: () => fromSupabase(supabase.from('estimates').select('*').eq('estimate_id', estimate_id).single()),
 });
-
 export const useAddEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -203,7 +193,6 @@ export const useAddEstimate = () => {
         },
     });
 };
-
 export const useUpdateEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -213,7 +202,6 @@ export const useUpdateEstimate = () => {
         },
     });
 };
-
 export const useDeleteEstimate = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -229,12 +217,10 @@ export const usePreConfiguredJobs = () => useQuery({
     queryKey: ['pre_configured_jobs'],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*')),
 });
-
 export const usePreConfiguredJob = (id) => useQuery({
     queryKey: ['pre_configured_jobs', id],
     queryFn: () => fromSupabase(supabase.from('pre_configured_jobs').select('*').eq('id', id).single()),
 });
-
 export const useAddPreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -244,7 +230,6 @@ export const useAddPreConfiguredJob = () => {
         },
     });
 };
-
 export const useUpdatePreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -254,7 +239,6 @@ export const useUpdatePreConfiguredJob = () => {
         },
     });
 };
-
 export const useDeletePreConfiguredJob = () => {
     const queryClient = useQueryClient();
     return useMutation({
